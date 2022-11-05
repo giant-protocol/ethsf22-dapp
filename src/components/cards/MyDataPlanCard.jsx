@@ -126,8 +126,12 @@ const MyDataPlanCard = ({ data, adminAddress, status }) => {
 
       <S.MyDataPlanBody>
         <S.StatusContainer>
-          <S.StatusText sx={{display:"flex",alignItems:"center",gap:"0.3rem"}}>
-            Status : <img src={status === "Inactive" ? YellowDot :GreenDot} alt="" /> {status}
+          <S.StatusText
+            sx={{ display: "flex", alignItems: "center", gap: "0.3rem" }}
+          >
+            Status :{" "}
+            <img src={status === "Inactive" ? YellowDot : GreenDot} alt="" />{" "}
+            {status}
           </S.StatusText>
           <PrimayButton
             style={{

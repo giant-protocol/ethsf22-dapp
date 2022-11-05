@@ -1,3 +1,5 @@
+import { metaMask } from "../connectors/Metamask";
+
 export function getTransactionReceiptMined(txHash, library, interval) {
   const transactionReceiptAsync = (resolve, reject) => {
     library
@@ -29,3 +31,12 @@ export function getTransactionReceiptMined(txHash, library, interval) {
     throw new Error("Invalid Type: " + txHash);
   }
 }
+
+export const handleConnect = () => {
+  if (window && window?.ethereum) {
+    metaMask.activate();
+    localStorage.setItem("isConnected", true);
+  } else {
+    window.open("https://metamask.io/");
+  }
+};

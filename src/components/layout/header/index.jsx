@@ -7,22 +7,11 @@ import MetamaskIcon from "../../../assets/icons/MetamaskIcon.svg";
 import { metaMask } from "../../../connectors/Metamask";
 import { S } from "./styles";
 import { useWeb3React } from "@web3-react/core";
-import useGetBalance from "../../../hooks/useGetBalance";
+import { handleConnect } from "../../../utils";
 
 const Header = () => {
   const mobileView = useMediaQuery("(max-width:450px)");
   const { account } = useWeb3React();
-  const balance = useGetBalance();
-  const isConnected = localStorage.getItem("isConnected");
-
-  const handleConnect = () => {
-    if (window && window?.ethereum) {
-      metaMask.activate();
-      localStorage.setItem("isConnected", true);
-    } else {
-      window.open("https://metamask.io/");
-    }
-  };
 
   return (
     <S.HeaderWrapper>

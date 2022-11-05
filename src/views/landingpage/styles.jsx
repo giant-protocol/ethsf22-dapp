@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 
 const LandingPageContainer = styled(Box)(({ theme }) => ({
@@ -29,6 +30,26 @@ const MyDataPlansCard = styled(Box)(({ theme }) => ({
   justifyContent: "space-between",
 }));
 
+const ConnectWalletButtonContainer = styled(Box)(({ theme }) => ({
+  display: "grid",
+  placeContent: "center",
+  height: "45vh",
+}));
+const ConnectWalletButton = styled(Button)(({ theme }) => ({
+  width: "24rem",
+  height: "4.375rem",
+  fontWeight: "700",
+  fontSize: "1.125rem",
+  color: "#0B213E",
+  textTransform: "none",
+  background: "rgba(226, 118, 37, 0.1);",
+  borderRadius: "0.5rem",
+  display: "flex",
+  justifyContent: "center",
+  gap: "1rem",
+  position: "relative",
+  top: "-1rem",
+}));
 const MyDataPlansCardHeader = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
@@ -62,4 +83,6 @@ export const S = {
   MyDataPlansCardBody,
   ExplorePlansCard,
   ExplorePlansCardBody,
+  ConnectWalletButtonContainer,
+  ConnectWalletButton,
 };
