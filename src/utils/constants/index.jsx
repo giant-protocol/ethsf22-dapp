@@ -48,7 +48,7 @@ export const EXPLORE_CARD_PLANS = [
     backgroundColor:
       "linear-gradient(180deg, #F8D0D4 0%, rgba(253, 240, 242, 0) 100%);",
     backgroundColorHeader:
-      "linear-gradient(113.74deg, #F8D0D4 9.6%, rgba(253, 240, 242, 0) 91.34%);;",
+      "linear-gradient(113.74deg, #F8D0D4 9.6%, #FDF0F2 91.34%)",
     innerGradient:
       "linear-gradient(180deg, #F79EA7 0%, rgba(248, 208, 212, 0) 100%);",
     borderColor: "#EF5153",

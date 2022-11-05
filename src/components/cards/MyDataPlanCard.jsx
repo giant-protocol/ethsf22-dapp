@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import GreenDot from "../../assets/icons/GreenDot.svg";
 import YellowDot from "../../assets/icons/YellowDot.svg";
@@ -10,6 +10,7 @@ import esfContractService from "../../ethereum/contract/esfContractService";
 import { useWeb3React } from "@web3-react/core";
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
+import { EXPLORE_CARD_PLANS } from "../../utils/constants";
 
 const MyDataPlanCard = ({
   data,
@@ -21,6 +22,21 @@ const MyDataPlanCard = ({
 }) => {
   const { account } = useWeb3React();
   const [loading, setLoading] = useState(false);
+  const [packSize, setPackSize] = useState("");
+
+  useEffect(() => {
+    let temp = getValueFromDataByTraitType("quantity_of_data_in_GB");
+
+    if (temp) {
+      setPackSize(temp);
+    }
+
+    packSize !== "" && getGradientColor();
+  }, [data, packSize]);
+
+  const [gradientColor, setGradientColor] = useState(
+    "linear-gradient(113.74deg, #F8D0D4 9.6%, rgba(253, 240, 242, 0) 91.34%);"
+  );
 
   const getValueFromDataByTraitType = (traitType) => {
     let outputData;
@@ -88,11 +104,21 @@ const MyDataPlanCard = ({
     setModalData(data);
   };
 
+  const getGradientColor = () => {
+    let planGradient;
+    EXPLORE_CARD_PLANS.forEach((plan) => {
+      if (plan.packSize === parseInt(packSize)) {
+        planGradient = plan.backgroundColorHeader;
+      }
+    });
+    setGradientColor(planGradient);
+  };
+
   return (
     <S.MyDataPlanCardContainer>
       <S.MyDataPlanHeader
         style={{
-          background: `linear-gradient(113.74deg,#F8D0D4 9.6%, #FDF0F2 91.34%)`,
+          background: gradientColor,
         }}
       >
         <Box
@@ -102,9 +128,7 @@ const MyDataPlanCard = ({
             verticalAlign: "baseline",
           }}
         >
-          <S.DataLimitText>
-            {getValueFromDataByTraitType("quantity_of_data_in_GB")}
-          </S.DataLimitText>
+          <S.DataLimitText>{packSize}</S.DataLimitText>
           &nbsp;
           <S.DataValueText>GB</S.DataValueText>
         </Box>
