@@ -83,6 +83,12 @@ const DataValueText = styled(Typography)(({ theme }) => ({
 const DaysText = styled(DataValueText)(({ theme }) => ({
   fontSize: "1.25rem",
 }));
+const DeviceToggleContainer = styled(DataValueText)(({ theme }) => ({
+  padding: "1.25rem 0 1.25rem 0",
+  margin: "0 2.3125rem 0 2.5rem",
+  borderBottom: `1px solid ${theme.palette.grey[700]}`,
+  boxSizing: "border-box",
+}));
 
 export const S = {
   ModalMainContainer,
@@ -91,4 +97,5 @@ export const S = {
   ModalSubHeader,
   DataValueText,
   DaysText,
+  DeviceToggleContainer,
 };

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ExplorePlanCard from "../../components/cards/ExplorePlanCard";
 import MyDataPlanCard from "../../components/cards/MyDataPlanCard";
-import { EXPLORE_CARD_PLANS } from "../../utils/constants";
+import { DEVICE_TYPE, EXPLORE_CARD_PLANS } from "../../utils/constants";
 import TopBannerImg from "../../assets/TopBanner.png";
 import MetamaskIcon from "../../assets/icons/MetamaskIcon.svg";
 import { S } from "./styles";
@@ -20,6 +20,7 @@ const LandingPage = () => {
   const [updateUserPlans, setUpdateUserPlans] = useState(false);
   const [enableShowQrModal, setEnableShowQRModal] = useState(false);
   const [modalData, setModalData] = useState([]);
+  const [deviceType, setDeviceType] = useState(DEVICE_TYPE[0].value);
   const { account } = useWeb3React();
 
   useEffect(() => {
@@ -113,6 +114,8 @@ const LandingPage = () => {
         show={enableShowQrModal}
         setEnableShowQRModal={setEnableShowQRModal}
         modalData={modalData}
+        deviceType={deviceType}
+        setDeviceType={setDeviceType}
       />
     </>
   );

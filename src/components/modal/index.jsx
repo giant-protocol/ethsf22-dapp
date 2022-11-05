@@ -6,8 +6,16 @@ import ReactCountryFlag from "react-country-flag";
 import { Box } from "@mui/system";
 import { EXPLORE_CARD_PLANS } from "../../utils/constants";
 import { getValueFromDataByTraitType } from "../../utils";
+import DeviceToggle from "../toggle/DeviceToggle";
+import Scan from "./scan";
 
-const QrModal = ({ show, setEnableShowQRModal, modalData }) => {
+const QrModal = ({
+  show,
+  setEnableShowQRModal,
+  modalData,
+  deviceType,
+  setDeviceType,
+}) => {
   const [gradientColor, setGradientColor] = useState(
     "linear-gradient(113.74deg, #F8D0D4 9.6%, rgba(253, 240, 242, 0) 91.34%);"
   );
@@ -70,6 +78,12 @@ const QrModal = ({ show, setEnableShowQRModal, modalData }) => {
             />
           </S.CustomIconButton>
         </S.ModalHeader>
+
+        <S.DeviceToggleContainer>
+          <DeviceToggle deviceType={deviceType} setDeviceType={setDeviceType} />
+        </S.DeviceToggleContainer>
+
+        <Scan deviceType={deviceType} />
       </S.ModalMainContainer>
     </Modal>
   );

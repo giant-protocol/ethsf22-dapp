@@ -82,3 +82,8 @@ export const EXPLORE_CARD_PLANS = [
     illustration: USA_1GB_Illustration,
   },
 ];
+
+export const DEVICE_TYPE = [
+  { value: "android", label: "Android" },
+  { value: "ios", label: "iOS" },
+];
