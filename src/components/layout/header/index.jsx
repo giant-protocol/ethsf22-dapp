@@ -3,6 +3,7 @@ import React from "react";
 import WalletIcon from "../../../assets/icons/WalletIcon.svg";
 import MainLogoBeta from "../../../assets/icons/MainLogoBeta.svg";
 import MobileViewLogo from "../../../assets/icons/GiantMobileLogo.svg";
+import MetamaskIcon from "../../../assets/icons/MetamaskIcon.svg";
 import { metaMask } from "../../../connectors/Metamask";
 import { S } from "./styles";
 import { useWeb3React } from "@web3-react/core";
@@ -30,16 +31,10 @@ const Header = () => {
           <img src={mobileView ? MobileViewLogo : MainLogoBeta} alt="" />
         </S.LogoContainer>
         {!account ? (
-          <div
-            style={{
-              cursor: "pointer",
-            }}
-            onClick={handleConnect}
-          >
-            <Tooltip title="Connect wallet" arrow>
-              <img src={WalletIcon} alt="walletLogo" />
-            </Tooltip>
-          </div>
+          <S.WalletWrapperContainer onClick={handleConnect}>
+            <img src={MetamaskIcon} alt="walletLogo" />
+            Connect Metamask
+          </S.WalletWrapperContainer>
         ) : (
           <S.BalanceContainer
             onClick={() => {
@@ -47,25 +42,7 @@ const Header = () => {
               metaMask.resetState();
             }}
           >
-            <S.LeftContainer
-              className="animate__animated animate__fadeInRight"
-              sx={{ fontWeight: 700, fontSize: "18px" }}
-            >
-              {balance?.balance ? balance?.balance?.toPrecision(4) : "0"}
-              &nbsp;ETH
-            </S.LeftContainer>
-
-            <img
-              src={WalletIcon}
-              style={{
-                zIndex: "99",
-                background: isConnected ? "#CED6E0" : "",
-                height: "2.5rem",
-              }}
-              className="animate__animated animate__fadeIn"
-              alt="walletLogo"
-            />
-            <S.RightContainer
+            <S.WalletWrapperContainer
               sx={{
                 fontWeight: 400,
                 color: "#66717B",
@@ -73,9 +50,10 @@ const Header = () => {
               }}
               className="animate__animated animate__fadeInLeft"
             >
+              <img src={MetamaskIcon} alt="walletLogo" />
               {account?.substring(0, 6)}...
               {account?.substring(account.length - 4)}
-            </S.RightContainer>
+            </S.WalletWrapperContainer>
           </S.BalanceContainer>
         )}
       </S.HeaderContainer>

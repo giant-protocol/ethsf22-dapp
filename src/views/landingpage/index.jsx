@@ -13,8 +13,6 @@ const LandingPage = () => {
   const [adminAddress, setAdminAddress] = useState([]);
   const { account } = useWeb3React();
 
-  console.log(account, "ACCOUNT");
-
   useEffect(() => {
     if (account !== undefined) {
       getUserPlans();
@@ -158,7 +156,7 @@ const LandingPage = () => {
 
   return (
     <>
-      <img src={TopBannerImg} alt="" style={{ marginTop: "5rem" }} srcset="" />
+      <img src={TopBannerImg} alt="" style={{ marginTop: "5rem",width:"100vw" }} srcset="" />
       <S.LandingPageContainer>
         <S.MyDataPlansCard>
           <S.MyDataPlansCardHeader>My Data Plans</S.MyDataPlansCardHeader>

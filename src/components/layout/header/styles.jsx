@@ -35,25 +35,18 @@ const BalanceContainer = styled(Box)(({ theme }) => ({
   borderRadius: "20px",
 }));
 
-const LeftContainer = styled(Box)(({ theme }) => ({
-  background: theme.palette.primary.light,
-  width: "100%",
-  alignItems: "center",
-  display: "flex",
-  justifyContent: "flex-end",
-  height: "2.5rem",
-  borderRadius: "2rem 0 0 2rem",
-  padding: "0 1rem",
-}));
 
-const RightContainer = styled(Box)(({ theme }) => ({
-  background: theme.palette.primary.light,
+const WalletWrapperContainer = styled(Box)(({ theme }) => ({
+  background: "#ced6e040",
   height: "2.5rem",
-  width: "100%",
+  maxWidth: "19.5rem",
   alignItems: "center",
   display: "flex",
+  justifyContent: "space-around",
+  gap:"1rem",
   padding: "0 1rem",
-  borderRadius: "0 2rem 2rem 0",
+  borderRadius: "2rem",
+  cursor: "pointer",
 }));
 
 const LogoContainer = styled(Box)(({ theme }) => ({
@@ -64,7 +57,6 @@ export const S = {
   HeaderWrapper,
   HeaderContainer,
   BalanceContainer,
-  LeftContainer,
-  RightContainer,
+  WalletWrapperContainer,
   LogoContainer,
 };
