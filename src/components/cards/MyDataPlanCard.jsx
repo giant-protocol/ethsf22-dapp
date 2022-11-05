@@ -1,14 +1,15 @@
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import ReactCountryFlag from "react-country-flag";
-import TowerIcon from "../../assets/icons/tower-cell.svg";
-import CalendarIcon from "../../assets/icons/CalendarOutlined.png";
+import GreenDot from "../../assets/icons/GreenDot.svg";
+import YellowDot from "../../assets/icons/YellowDot.svg";
 import { S } from "./MyDataPlanCardStyles";
 import PlanDetailsCard from "./PlanDetailsCard";
 import PrimayButton from "../../components/buttons/PrimaryButton";
 import esfContractService from "../../ethereum/contract/esfContractService";
 import { useWeb3React } from "@web3-react/core";
 import { getTransactionReceiptMined } from "../../utils";
+import { CircularProgress } from "@mui/material";
 
 const MyDataPlanCard = ({ data, adminAddress, status }) => {
   const { account, library } = useWeb3React();
@@ -125,7 +126,9 @@ const MyDataPlanCard = ({ data, adminAddress, status }) => {
 
       <S.MyDataPlanBody>
         <S.StatusContainer>
-          <S.StatusText>Status : {status}</S.StatusText>
+          <S.StatusText sx={{display:"flex",alignItems:"center",gap:"0.3rem"}}>
+            Status : <img src={status === "Inactive" ? YellowDot :GreenDot} alt="" /> {status}
+          </S.StatusText>
           <PrimayButton
             style={{
               height: "35px",
@@ -135,7 +138,13 @@ const MyDataPlanCard = ({ data, adminAddress, status }) => {
               status === "Inactive" ? handleActivate() : handleQr()
             }
           >
-            {status === "Inactive" ? "Activate" : "Show eSIM QR"}
+            {loading ? (
+              <CircularProgress color="inherit" size="1.5rem" />
+            ) : status === "Inactive" ? (
+              "Activate Now"
+            ) : (
+              "Show eSIM QR"
+            )}
           </PrimayButton>
         </S.StatusContainer>
         <PlanDetailsCard />
