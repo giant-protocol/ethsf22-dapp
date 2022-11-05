@@ -18,10 +18,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if(account !== undefined){
+    if(account !== undefined && provider !== undefined){
       esfContractService.setup(provider)
     }
-  }, [account])
+  }, [account,provider])
   
 
   return (
