@@ -54,7 +54,7 @@ export const EXPLORE_CARD_PLANS = [
     borderColor: "#EF5153",
     validity: "30 Days",
     illustration: USA_5GB_Illustration,
-    link: `${process.env.REACT_APP_OPENSEA_LINK}assets/goerli/${process.env.REACT_APP_CONTRACT_ADDRESS}/0`,
+    link: `${process.env.REACT_APP_OPENSEA_LINK}assets/goerli/${process.env.REACT_APP_CONTRACT_ADDRESS}/2`,
   },
   {
     id: 2,
@@ -82,7 +82,7 @@ export const EXPLORE_CARD_PLANS = [
     borderColor: "#D3832C",
     validity: "7 Days",
     illustration: USA_1GB_Illustration,
-    link: `${process.env.REACT_APP_OPENSEA_LINK}assets/goerli/${process.env.REACT_APP_CONTRACT_ADDRESS}/2`,
+    link: `${process.env.REACT_APP_OPENSEA_LINK}assets/goerli/${process.env.REACT_APP_CONTRACT_ADDRESS}/0`,
   },
 ];
 
