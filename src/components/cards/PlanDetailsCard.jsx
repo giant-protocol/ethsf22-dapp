@@ -8,6 +8,7 @@ import CustomProgessBar from "../progressbar";
 import { S } from "./PlanDetailsCard.Styles";
 
 const PlanDetailsCard = ({ data, status }) => {
+  let lastUpdatedOn = moment(new Date(data?.updatedOn)).valueOf();
   return (
     <S.MyDataPlanBodyContentCard>
       <S.BottomContainer>
@@ -34,13 +35,17 @@ const PlanDetailsCard = ({ data, status }) => {
         )}
       </S.BottomContainer>
       <CustomProgessBar
-        dctStatus={"minted"}
+        dctStatus={status === "Inactive" ? "inactive" : "enabled"}
         remainValue={
           status === "Inactive"
-            ? getValueFromDataByTraitType("quantity_of_data_in_GB", data)
+            ? getValueFromDataByTraitType("quantity_of_data_in_GB", data) *
+              1073741824
             : data?.dataUsageRemainingInBytes
         }
-        totalValue={5368709120}
+        totalValue={
+          getValueFromDataByTraitType("quantity_of_data_in_GB", data) *
+          1073741824
+        }
         esimStatus={"enabled"}
       />
       <S.DataAvailableText sx={{ alignSelf: "flex-end" }}>
@@ -49,7 +54,7 @@ const PlanDetailsCard = ({ data, status }) => {
             Last Updated:&nbsp;
             <S.BoldText>
               {" "}
-              {moment(data?.endTime).format("MMMM DD, YYYY")}
+              {moment(lastUpdatedOn).format("MMMM DD, YYYY hh:mm a")}
             </S.BoldText>
           </>
         )}

@@ -12,7 +12,7 @@ import { useWeb3React } from "@web3-react/core";
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import { EXPLORE_CARD_PLANS } from "../../utils/constants";
-import { getValueFromDataByTraitType } from "../../utils";
+import { convertToPascalCase, getValueFromDataByTraitType } from "../../utils";
 
 const MyDataPlanCard = ({
   data,
@@ -147,7 +147,9 @@ const MyDataPlanCard = ({
           >
             Status :{" "}
             <img src={status === "Inactive" ? YellowDot : GreenDot} alt="" />{" "}
-            {status}
+            {status === "Inactive"
+              ? "Inactive"
+              : convertToPascalCase(data?.eSimStatus)}
             {status === "Active" && (
               <img
                 src={RefreshIcon}
