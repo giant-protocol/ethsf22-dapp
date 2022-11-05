@@ -61,6 +61,7 @@ const MyDataPlanCard = ({
 
   const checkPaymentStatus = (response) => {
     let confirmationTimeout;
+    let plansTimer;
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/api/wallet/plan/validate`, {
         walletAddress: account,
@@ -76,7 +77,9 @@ const MyDataPlanCard = ({
           }, 15000);
         } else {
           setLoading(false);
-          setUpdateUserPlans();
+          plansTimer = setTimeout(() => {
+            setUpdateUserPlans();
+          }, 5000);
           setEnableShowQRModal(true);
         }
       })

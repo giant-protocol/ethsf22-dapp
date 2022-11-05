@@ -23,6 +23,8 @@ const FooterLogoContainer = styled(Grid)(({ theme }) => ({
   alignItems: "flex-start",
   flexDirection: "column",
   justifyContent: "space-between",
+  position: "absolute",
+  left:"4rem",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
   },
@@ -42,10 +44,11 @@ const FooterContainer = styled(Grid)(({ theme }) => ({
   flexWrap: "wrap",
   flexFlow: "row-wrap",
   height: "100%",
-  padding: "0 0 0.8rem 4.3rem",
+  // padding: "0 0 0.8rem 4.3rem",
   width: "100%",
   maxWidth: "1600px",
   margin: "auto",
+  position: "relative",
   justifyContent: "space-evenly",
   [theme.breakpoints.down("sm")]: {
     padding: "0rem",
@@ -94,12 +97,12 @@ const LinkButton = styled(Button)(({ theme }) => ({
   color: "#FCFCFC",
   textTransform: "none",
   display: "flex",
-  justifyContent: "left",
+  justifyContent: "center",
   padding: "0",
   fontWeight: "400",
   fontSize: "13.5px",
   "@media (max-width: 400px)": {
-    margin: "auto",
+    // margin: "auto",
     justifyContent: "center",
   },
 }));
@@ -109,7 +112,7 @@ const FooterHeaderText = styled(Typography)(({ theme }) => ({
   fontSize: "1.125rem",
   fontWeight: 700,
   marginBottom: "2rem",
-  textAlign:"left",
+  textAlign: "left",
   "@media (max-width: 400px)": {
     marginBottom: "1rem",
   },
@@ -142,7 +145,6 @@ const FooterCustomSubContainer = styled(FooterSubContainer)(({ theme }) => ({
 
 const SocialMediaContainer = styled(Grid)(({ theme }) => ({
   padding: "2.5rem 0 0 0rem",
-  width: "25%",
   [theme.breakpoints.down("sm")]: {
     width: "100%",
     maxWidth: "100%",
