@@ -62,15 +62,12 @@ const MyDataPlanCard = ({
   const checkPaymentStatus = (response) => {
     let confirmationTimeout;
     axios
-      .post(
-        `${process.env.REACT_APP_BACKEND_URL}/api/wallet/payment/confirmation`,
-        {
-          walletAddress: account,
-          tokenId: data?.tokenId,
-          amount: data?.amount,
-          transactionHash: response?.hash,
-        }
-      )
+      .post(`${process.env.REACT_APP_BACKEND_URL}/api/wallet/plan/validate`, {
+        walletAddress: account,
+        tokenId: data?.tokenId,
+        amount: data?.amount,
+        transactionHash: response?.hash,
+      })
       .then((res) => {
         console.log(res, "res2");
         if (res?.data?.status !== true) {
