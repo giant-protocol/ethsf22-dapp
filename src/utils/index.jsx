@@ -8,3 +8,14 @@ export const handleConnect = () => {
     window.open("https://metamask.io/");
   }
 };
+
+export const getValueFromDataByTraitType = (traitType, data) => {
+  let outputData;
+  data?.metadata?.attributes?.forEach((val) => {
+    if (val.trait_type === traitType) {
+      outputData = val.value;
+    }
+  });
+
+  return outputData;
+};

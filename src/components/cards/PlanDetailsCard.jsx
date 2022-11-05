@@ -1,29 +1,58 @@
 import { Box } from "@mui/material";
+import moment from "moment";
 import React from "react";
+import { getValueFromDataByTraitType } from "../../utils";
 import CustomProgessBar from "../progressbar";
 // import GiantDollor from "assets/icons/GiantDollor.svg";
 
 import { S } from "./PlanDetailsCard.Styles";
 
-const PlanDetailsCard = () => {
+const PlanDetailsCard = ({ data, status }) => {
+  console.log(data, "DATA");
+
   return (
     <S.MyDataPlanBodyContentCard>
       <S.BottomContainer>
-        <S.DataAvailableText>Data Available:</S.DataAvailableText>
-        <S.DataAvailableText>
-          Expires on:&nbsp;<S.BoldText>November 30,2022</S.BoldText>
+        <S.DataAvailableText
+          sx={{ display: "flex", alignItems: "baseline", gap: "0.3rem" }}
+        >
+          Data Available:
+          <S.DataValueText>
+            {" "}
+            {getValueFromDataByTraitType(
+              "quantity_of_data_in_GB",
+              data
+            )} GB{" "}
+          </S.DataValueText>
         </S.DataAvailableText>
+        {status === "Active" && (
+          <S.DataAvailableText>
+            Expires on:&nbsp;
+            <S.BoldText>
+              {" "}
+              {moment(data?.endTime * 1000).format("MMMM DD, YYYY")}
+            </S.BoldText>
+          </S.DataAvailableText>
+        )}
       </S.BottomContainer>
 
       <CustomProgessBar
         dctStatus={"minted"}
-        remainValue={5368709120}
+        remainValue={
+          status === "Inactive"
+            ? getValueFromDataByTraitType("quantity_of_data_in_GB", data)
+            : data?.dataUsageRemainingInBytes
+        }
         totalValue={5368709120}
         esimStatus={"enabled"}
       />
 
       <S.DataAvailableText sx={{ alignSelf: "flex-end" }}>
-        Last Updated:&nbsp;<S.BoldText>November 30,2022</S.BoldText>
+        Last Updated:&nbsp;
+        <S.BoldText>
+          {" "}
+          {moment(data?.endTime).format("MMMM DD, YYYY")}
+        </S.BoldText>
       </S.DataAvailableText>
 
       {/* for reference  */}

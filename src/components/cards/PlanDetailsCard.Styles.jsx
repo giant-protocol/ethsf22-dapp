@@ -34,9 +34,16 @@ const BoldText = styled(Typography)(({ theme }) => ({
   color: "#000000",
 }));
 
+const DataValueText = styled(Typography)(({ theme }) => ({
+  fontWeight: "700",
+  fontSize: "1.125rem",
+  color: "#00C853",
+}));
+
 export const S = {
   MyDataPlanBodyContentCard,
   DataAvailableText,
   BottomContainer,
   BoldText,
+  DataValueText,
 };

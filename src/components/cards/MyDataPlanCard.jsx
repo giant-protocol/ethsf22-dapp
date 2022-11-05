@@ -11,6 +11,7 @@ import { useWeb3React } from "@web3-react/core";
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
 import { EXPLORE_CARD_PLANS } from "../../utils/constants";
+import { getValueFromDataByTraitType } from "../../utils";
 
 const MyDataPlanCard = ({
   data,
@@ -25,7 +26,7 @@ const MyDataPlanCard = ({
   const [packSize, setPackSize] = useState("");
 
   useEffect(() => {
-    let temp = getValueFromDataByTraitType("quantity_of_data_in_GB");
+    let temp = getValueFromDataByTraitType("quantity_of_data_in_GB", data);
 
     if (temp) {
       setPackSize(temp);
@@ -37,17 +38,6 @@ const MyDataPlanCard = ({
   const [gradientColor, setGradientColor] = useState(
     "linear-gradient(113.74deg, #F8D0D4 9.6%, rgba(253, 240, 242, 0) 91.34%);"
   );
-
-  const getValueFromDataByTraitType = (traitType) => {
-    let outputData;
-    data?.metadata?.attributes?.forEach((val) => {
-      if (val.trait_type === traitType) {
-        outputData = val.value;
-      }
-    });
-
-    return outputData;
-  };
 
   const handleActivate = async () => {
     setLoading(true);
@@ -133,9 +123,9 @@ const MyDataPlanCard = ({
           <S.DataValueText>GB</S.DataValueText>
         </Box>
         <S.CountryText>
-          {getValueFromDataByTraitType("destination")}{" "}
+          {getValueFromDataByTraitType("destination", data)}{" "}
           <ReactCountryFlag
-            countryCode={getValueFromDataByTraitType("country_code")}
+            countryCode={getValueFromDataByTraitType("country_code", data)}
           />
         </S.CountryText>
       </S.MyDataPlanHeader>
@@ -167,7 +157,7 @@ const MyDataPlanCard = ({
             )}
           </PrimayButton>
         </S.StatusContainer>
-        <PlanDetailsCard />
+        <PlanDetailsCard data={data} status={status} />
       </S.MyDataPlanBody>
     </S.MyDataPlanCardContainer>
   );

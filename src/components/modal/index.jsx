@@ -5,6 +5,7 @@ import { S } from "./styles";
 import ReactCountryFlag from "react-country-flag";
 import { Box } from "@mui/system";
 import { EXPLORE_CARD_PLANS } from "../../utils/constants";
+import { getValueFromDataByTraitType } from "../../utils";
 
 const QrModal = ({ show, setEnableShowQRModal, modalData }) => {
   const [gradientColor, setGradientColor] = useState(
@@ -15,19 +16,8 @@ const QrModal = ({ show, setEnableShowQRModal, modalData }) => {
     setEnableShowQRModal(false);
   };
 
-  const getValueFromDataByTraitType = (traitType) => {
-    let outputData;
-    modalData?.metadata?.attributes?.forEach((val) => {
-      if (val.trait_type === traitType) {
-        outputData = val.value;
-      }
-    });
-
-    return outputData;
-  };
-
   useEffect(() => {
-    let temp = getValueFromDataByTraitType("quantity_of_data_in_GB");
+    let temp = getValueFromDataByTraitType("quantity_of_data_in_GB", modalData);
 
     if (temp) {
       setPackSize(temp);
@@ -56,13 +46,17 @@ const QrModal = ({ show, setEnableShowQRModal, modalData }) => {
             >
               <S.DataValueText> {packSize}</S.DataValueText> GB{" "}
               <S.DaysText>
-                | {getValueFromDataByTraitType("validity_in_days")} days
+                | {getValueFromDataByTraitType("validity_in_days", modalData)}{" "}
+                days
               </S.DaysText>
             </Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
-              {getValueFromDataByTraitType("destination")}
+              {getValueFromDataByTraitType("destination", modalData)}
               <ReactCountryFlag
-                countryCode={getValueFromDataByTraitType("country_code")}
+                countryCode={getValueFromDataByTraitType(
+                  "country_code",
+                  modalData
+                )}
               />
             </Box>
           </S.ModalSubHeader>
