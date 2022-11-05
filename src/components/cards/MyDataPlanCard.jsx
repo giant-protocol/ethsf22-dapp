@@ -11,7 +11,14 @@ import { useWeb3React } from "@web3-react/core";
 import { CircularProgress } from "@mui/material";
 import axios from "axios";
 
-const MyDataPlanCard = ({ data, adminAddress, status, setUpdateUserPlans }) => {
+const MyDataPlanCard = ({
+  data,
+  adminAddress,
+  status,
+  setUpdateUserPlans,
+  setEnableShowQRModal,
+  setModalData,
+}) => {
   const { account } = useWeb3React();
   const [loading, setLoading] = useState(false);
 
@@ -67,6 +74,7 @@ const MyDataPlanCard = ({ data, adminAddress, status, setUpdateUserPlans }) => {
         } else {
           setLoading(false);
           setUpdateUserPlans();
+          setEnableShowQRModal(true);
         }
       })
       .catch((err) => {
@@ -75,7 +83,10 @@ const MyDataPlanCard = ({ data, adminAddress, status, setUpdateUserPlans }) => {
       });
   };
 
-  const handleQr = () => {};
+  const handleQr = () => {
+    setEnableShowQRModal(true);
+    setModalData(data);
+  };
 
   return (
     <S.MyDataPlanCardContainer>

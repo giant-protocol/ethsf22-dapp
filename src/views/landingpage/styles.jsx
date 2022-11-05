@@ -65,15 +65,18 @@ const MyDataPlansCardBody = styled(Box)(({ theme }) => ({
   flexWrap: "wrap",
   gap: "1rem",
   justifyContent: "space-between",
-  padding: "0 1rem",
+  padding: "0 0.5rem",
 }));
 
 const ExplorePlansCard = styled(MyDataPlansCard)(({ theme }) => ({
   maxHeight: "unset",
   height: "48.75rem",
+  gap: "0.5rem",
+  justifyContent: "space-around",
 }));
 const ExplorePlansCardBody = styled(MyDataPlansCardBody)(({ theme }) => ({
   maxHeight: "unset",
+  padding: "0",
 }));
 
 export const S = {

@@ -10,6 +10,7 @@ import { useWeb3React } from "@web3-react/core";
 import { handleConnect } from "../../utils";
 import { CircularProgress } from "@mui/material";
 import DummyCard from "../../components/cards/DummyCard";
+import QrModal from "../../components/modal";
 
 const LandingPage = () => {
   const [activePlans, setActivePlans] = useState([]);
@@ -17,6 +18,8 @@ const LandingPage = () => {
   const [adminAddress, setAdminAddress] = useState("");
   const [plansLoading, setPlansLoading] = useState(false);
   const [updateUserPlans, setUpdateUserPlans] = useState(false);
+  const [enableShowQrModal, setEnableShowQRModal] = useState(false);
+  const [modalData, setModalData] = useState([]);
   const { account } = useWeb3React();
 
   useEffect(() => {
@@ -66,6 +69,8 @@ const LandingPage = () => {
                         adminAddress={adminAddress}
                         status="Inactive"
                         setUpdateUserPlans={() => setUpdateUserPlans(true)}
+                        setEnableShowQRModal={setEnableShowQRModal}
+                        setModalData={setModalData}
                       />
                     );
                   })}
@@ -75,6 +80,8 @@ const LandingPage = () => {
                         data={data}
                         key={data.id}
                         status="Active"
+                        setEnableShowQRModal={setEnableShowQRModal}
+                        setModalData={setModalData}
                       />
                     );
                   })}
@@ -102,6 +109,11 @@ const LandingPage = () => {
           </S.ExplorePlansCardBody>
         </S.ExplorePlansCard>
       </S.LandingPageContainer>
+      <QrModal
+        show={enableShowQrModal}
+        setEnableShowQRModal={setEnableShowQRModal}
+        modalData={modalData}
+      />
     </>
   );
 };
