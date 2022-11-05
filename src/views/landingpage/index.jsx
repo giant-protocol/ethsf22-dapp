@@ -13,9 +13,13 @@ const LandingPage = () => {
   const [adminAddress, setAdminAddress] = useState([]);
   const { account } = useWeb3React();
 
+  console.log(account, "ACCOUNT");
+
   useEffect(() => {
-    getUserPlans();
-  }, []);
+    if (account !== undefined) {
+      getUserPlans();
+    }
+  }, [account]);
 
   const getUserPlans = () => {
     axios
