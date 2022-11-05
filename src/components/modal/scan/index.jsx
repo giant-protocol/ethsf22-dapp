@@ -40,12 +40,7 @@ const Scan = ({ deviceType, data, handleClose }) => {
   const { iosStep1, iosStep2, iosStep3 } = iosSteps;
   const error = [step1, step2, step3].filter((v) => v).length < 3;
   const iosError = [iosStep1, iosStep2, iosStep3].filter((v) => v).length < 3;
-
-  //   const qrData =
-  //     activatedPurchasedata?.activationCode !== undefined
-  //       ? "data:image/png;base64," + activatedPurchasedata?.activationCode
-  //       : "data:image/png;base64," + walletPurchaseData?.activationCode;
-  const qrData = "data:image/png;base64," + "12345";
+  const qrData = "data:image/png;base64," + data?.activationCode;
 
   const handleVerification = () => {
     setVerificationLoading(true);

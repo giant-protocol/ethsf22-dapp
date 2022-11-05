@@ -8,8 +8,6 @@ import CustomProgessBar from "../progressbar";
 import { S } from "./PlanDetailsCard.Styles";
 
 const PlanDetailsCard = ({ data, status }) => {
-  console.log(data, "DATA");
-
   return (
     <S.MyDataPlanBodyContentCard>
       <S.BottomContainer>

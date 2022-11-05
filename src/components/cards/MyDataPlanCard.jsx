@@ -71,7 +71,6 @@ const MyDataPlanCard = ({
         transactionHash: response?.hash,
       })
       .then((res) => {
-        console.log(res, "res2");
         if (res?.data?.status !== true) {
           confirmationTimeout = setTimeout(() => {
             checkPaymentStatus(response);
@@ -81,6 +80,7 @@ const MyDataPlanCard = ({
           // plansTimer = setTimeout(() => {
           //   setUpdateUserPlans();
           // }, 5000);
+          setModalData(res?.data?.purchasedEsim);
           setEnableShowQRModal(true);
         }
       })
