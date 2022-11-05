@@ -33,7 +33,6 @@ const PlanDetailsCard = ({ data, status }) => {
           </S.DataAvailableText>
         )}
       </S.BottomContainer>
-
       <CustomProgessBar
         dctStatus={"minted"}
         remainValue={
@@ -44,15 +43,17 @@ const PlanDetailsCard = ({ data, status }) => {
         totalValue={5368709120}
         esimStatus={"enabled"}
       />
-
       <S.DataAvailableText sx={{ alignSelf: "flex-end" }}>
-        Last Updated:&nbsp;
-        <S.BoldText>
-          {" "}
-          {moment(data?.endTime).format("MMMM DD, YYYY")}
-        </S.BoldText>
+        {status === "Active" && (
+          <>
+            Last Updated:&nbsp;
+            <S.BoldText>
+              {" "}
+              {moment(data?.endTime).format("MMMM DD, YYYY")}
+            </S.BoldText>
+          </>
+        )}
       </S.DataAvailableText>
-
       {/* for reference  */}
       {/* <CustomProgessBar
         dctStatus={data?.dctStatus}

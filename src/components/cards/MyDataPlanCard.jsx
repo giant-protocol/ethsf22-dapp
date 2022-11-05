@@ -105,6 +105,15 @@ const MyDataPlanCard = ({
     setGradientColor(planGradient);
   };
 
+  const handleRefresh = () => {
+    axios.post(
+      `${process.env.REACT_APP_BACKEND_URL}/api/wallet/verify/installation`,
+      {
+        iccid: data?.iccid,
+      }
+    );
+  };
+
   return (
     <S.MyDataPlanCardContainer>
       <S.MyDataPlanHeader
@@ -140,7 +149,12 @@ const MyDataPlanCard = ({
             <img src={status === "Inactive" ? YellowDot : GreenDot} alt="" />{" "}
             {status}
             {status === "Active" && (
-              <img src={RefreshIcon} alt="" style={{ cursor: "pointer" }} />
+              <img
+                src={RefreshIcon}
+                alt=""
+                style={{ cursor: "pointer" }}
+                onClick={handleRefresh}
+              />
             )}
           </S.StatusText>
           <PrimayButton
