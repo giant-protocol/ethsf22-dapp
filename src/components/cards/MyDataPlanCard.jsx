@@ -10,7 +10,7 @@ import esfContractService from "../../ethereum/contract/esfContractService";
 import { useWeb3React } from "@web3-react/core";
 import { getTransactionReceiptMined } from "../../utils";
 
-const MyDataPlanCard = ({ data, adminAddress }) => {
+const MyDataPlanCard = ({ data, adminAddress, status }) => {
   const { account, library } = useWeb3React();
   const [loading, setLoading] = useState(false);
 
@@ -25,7 +25,7 @@ const MyDataPlanCard = ({ data, adminAddress }) => {
     return outputData;
   };
 
-  const handleActivate = () => {
+  const handleActivate = async () => {
     // let tx = contract.erc1155.contractWrapper.writeContract.safeTransferFrom({
     //   from: account,
     //   to: adminAddress,
@@ -41,7 +41,8 @@ const MyDataPlanCard = ({ data, adminAddress }) => {
     //   null,
     // ]);
     // console.log(tx, "TX");
-    esfContractService
+    setLoading(true);
+    await esfContractService
       .transfer({
         from: account,
         to: adminAddress,
@@ -49,11 +50,19 @@ const MyDataPlanCard = ({ data, adminAddress }) => {
         amount: 1,
         data: "0x65",
       })
-      .then((res) => console.log(res, "RESPONSE"))
-      .catch((err) => console.log(err, "ERROR"));
+      .then((res) => {
+        console.log(res, "RESPONSE");
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.log(err, "ERROR");
+        setLoading(false);
+      });
 
     // let state = getTransactionReceiptMined(response, library);
   };
+
+  const handleQr = () => {};
 
   // console.log(data.metadata, "DATA");
   // console.log(loading, "loading");
@@ -116,12 +125,17 @@ const MyDataPlanCard = ({ data, adminAddress }) => {
 
       <S.MyDataPlanBody>
         <S.StatusContainer>
-          <S.StatusText>Status : Active</S.StatusText>
+          <S.StatusText>Status : {status}</S.StatusText>
           <PrimayButton
-            style={{ height: "35px", width: "25%" }}
-            onClick={handleActivate}
+            style={{
+              height: "35px",
+              width: status === "Inactive" ? "25%" : "35%",
+            }}
+            onClick={() =>
+              status === "Inactive" ? handleActivate() : handleQr()
+            }
           >
-            Activate
+            {status === "Inactive" ? "Activate" : "Show eSIM QR"}
           </PrimayButton>
         </S.StatusContainer>
         <PlanDetailsCard />

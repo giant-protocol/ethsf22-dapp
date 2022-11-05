@@ -169,13 +169,13 @@ const LandingPage = () => {
                   data={data}
                   key={index}
                   adminAddress={adminAddress}
-                  type="inactiveplan"
+                  status="Inactive"
                 />
               );
             })}
             {activePlans?.map((data, index) => {
               return (
-                <MyDataPlanCard data={data} key={data.id} type="activeplan" />
+                <MyDataPlanCard data={data} key={data.id} status="Active" />
               );
             })}
           </S.MyDataPlansCardBody>
