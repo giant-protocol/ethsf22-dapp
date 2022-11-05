@@ -7,7 +7,9 @@ const DummyCard = () => {
     <S.MainContainer>
       <S.OpenSeaButton
         onClick={() =>
-          window.open("https://testnets.opensea.io/collection/giant-v3")
+          window.open(
+            `${process.env.REACT_APP_OPENSEA_LINK}collection/giant-v3`
+          )
         }
       >
         {" "}

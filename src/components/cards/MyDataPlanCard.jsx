@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import GreenDot from "../../assets/icons/GreenDot.svg";
 import YellowDot from "../../assets/icons/YellowDot.svg";
+import RefreshIcon from "../../assets/icons/RefreshIcon.svg";
 import { S } from "./MyDataPlanCardStyles";
 import PlanDetailsCard from "./PlanDetailsCard";
 import PrimayButton from "../../components/buttons/PrimaryButton";
@@ -138,6 +139,9 @@ const MyDataPlanCard = ({
             Status :{" "}
             <img src={status === "Inactive" ? YellowDot : GreenDot} alt="" />{" "}
             {status}
+            {status === "Active" && (
+              <img src={RefreshIcon} alt="" style={{ cursor: "pointer" }} />
+            )}
           </S.StatusText>
           <PrimayButton
             style={{
