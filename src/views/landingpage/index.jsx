@@ -9,6 +9,7 @@ import { S } from "./styles";
 import { useWeb3React } from "@web3-react/core";
 import { handleConnect } from "../../utils";
 import { CircularProgress } from "@mui/material";
+import DummyCard from "../../components/cards/DummyCard";
 
 const LandingPage = () => {
   const [activePlans, setActivePlans] = useState([]);
@@ -97,6 +98,7 @@ const LandingPage = () => {
             {EXPLORE_CARD_PLANS.map((plan) => {
               return <ExplorePlanCard key={plan.id} data={plan} />;
             })}
+            <DummyCard />
           </S.ExplorePlansCardBody>
         </S.ExplorePlansCard>
       </S.LandingPageContainer>
