@@ -5,19 +5,22 @@ import MyDataPlanCard from "../../components/cards/MyDataPlanCard";
 import { EXPLORE_CARD_PLANS } from "../../utils/constants";
 import TopBannerImg from "../../assets/TopBanner.png";
 import { S } from "./styles";
+import { useWeb3React } from "@web3-react/core";
 
 const LandingPage = () => {
   const [activePlans, setActivePlans] = useState([]);
   const [inActivePlans, setInactivePlans] = useState([]);
   const [adminAddress, setAdminAddress] = useState([]);
+  const { account } = useWeb3React();
+
   useEffect(() => {
     getUserPlans();
   }, []);
 
   const getUserPlans = () => {
     axios
-      .post("https://ethsf-2022-dev-api.herokuapp.com/api/wallet/plans", {
-        walletAddress: "0xe20ea5C046f8897800F43c1A22734A596E61a6AC",
+      .post(`${process.env.REACT_APP_BACKEND_URL}/api/wallet/plans`, {
+        walletAddress: account,
       })
       .then((res) => {
         setActivePlans(res.data.activePlans);

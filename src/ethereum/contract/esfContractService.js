@@ -3,7 +3,8 @@ import ETHSF from "../build/ETHSF.json";
 
 const esfContractService = () => {
   let contractInstance, deployed, contractWeb3, signer;
-  const contractAddress = "0x2ae22705c943a9a7cb29d27736df0cc8238c5a8c";
+  const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+  
   const setup = (_currentProvider) => {
     signer = _currentProvider.getSigner();
 
