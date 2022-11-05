@@ -45,7 +45,7 @@ const MyDataPlanCard = ({
       .transfer({
         from: account,
         to: adminAddress,
-        id: data.tokenId,
+        id: data.token_id,
         amount: 1,
         data: "0x65",
       })

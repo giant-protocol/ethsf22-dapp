@@ -11,7 +11,7 @@ export const handleConnect = () => {
 
 export const getValueFromDataByTraitType = (traitType, data) => {
   let outputData;
-  data?.metadata?.attributes?.forEach((val) => {
+  data?.external_data?.attributes?.forEach((val) => {
     if (val.trait_type === traitType) {
       outputData = val.value;
     }
