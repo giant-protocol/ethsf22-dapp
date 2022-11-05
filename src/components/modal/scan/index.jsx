@@ -5,8 +5,9 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { S } from "./styles";
 import { DEVICE_TYPE } from "../../../utils/constants";
 import PrimaryButton from "../../buttons/PrimaryButton";
+import axios from "axios";
 
-const Scan = ({ deviceType }) => {
+const Scan = ({ deviceType, data, handleClose }) => {
   const [iosSteps, setIosSteps] = useState({
     iosStep1: false,
     iosStep2: false,
@@ -46,7 +47,20 @@ const Scan = ({ deviceType }) => {
   //       : "data:image/png;base64," + walletPurchaseData?.activationCode;
   const qrData = "data:image/png;base64," + "12345";
 
-  const handleVerification = () => {};
+  const handleVerification = () => {
+    setVerificationLoading(true);
+    axios
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/wallet/verify/installation`,
+        {
+          iccid: data?.iccid,
+        }
+      )
+      .then((res) => {
+        handleClose();
+        setVerificationLoading(false);
+      });
+  };
 
   return (
     <S.ScanContainer>

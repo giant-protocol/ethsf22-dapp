@@ -10,7 +10,7 @@ const HeaderWrapper = styled(Box)(({ theme }) => ({
   top: 0,
   zIndex: 99,
   height: "5rem",
-  width: "100vw",
+  width: "100%",
 }));
 
 const HeaderContainer = styled(Box)(({ theme }) => ({

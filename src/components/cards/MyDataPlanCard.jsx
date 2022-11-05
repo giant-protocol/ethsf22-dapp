@@ -77,9 +77,9 @@ const MyDataPlanCard = ({
           }, 15000);
         } else {
           setLoading(false);
-          plansTimer = setTimeout(() => {
-            setUpdateUserPlans();
-          }, 5000);
+          // plansTimer = setTimeout(() => {
+          //   setUpdateUserPlans();
+          // }, 5000);
           setEnableShowQRModal(true);
         }
       })

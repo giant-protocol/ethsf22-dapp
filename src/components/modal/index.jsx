@@ -15,6 +15,7 @@ const QrModal = ({
   modalData,
   deviceType,
   setDeviceType,
+  getUserPlans,
 }) => {
   const [gradientColor, setGradientColor] = useState(
     "linear-gradient(113.74deg, #F8D0D4 9.6%, rgba(253, 240, 242, 0) 91.34%);"
@@ -22,6 +23,7 @@ const QrModal = ({
   const [packSize, setPackSize] = useState("");
   const handleClose = () => {
     setEnableShowQRModal(false);
+    getUserPlans();
   };
 
   useEffect(() => {
@@ -83,7 +85,11 @@ const QrModal = ({
           <DeviceToggle deviceType={deviceType} setDeviceType={setDeviceType} />
         </S.DeviceToggleContainer>
 
-        <Scan deviceType={deviceType} />
+        <Scan
+          deviceType={deviceType}
+          data={modalData}
+          handleClose={handleClose}
+        />
       </S.ModalMainContainer>
     </Modal>
   );

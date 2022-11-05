@@ -49,7 +49,7 @@ const LandingPage = () => {
       <img
         src={TopBannerImg}
         alt=""
-        style={{ marginTop: "5rem", width: "100vw" }}
+        style={{ marginTop: "5rem", width: "100%" }}
       />
       <S.LandingPageContainer>
         <S.MyDataPlansCard>
@@ -116,6 +116,7 @@ const LandingPage = () => {
         modalData={modalData}
         deviceType={deviceType}
         setDeviceType={setDeviceType}
+        getUserPlans={getUserPlans}
       />
     </>
   );
