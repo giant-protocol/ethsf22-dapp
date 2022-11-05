@@ -29,7 +29,6 @@ const ExplorePlanCard = ({ data }) => {
             bottom: data?.id === 3 ? "-0.4rem" : "-0.1rem",
           }}
           alt=""
-          srcset=""
         />
       </S.ExplorePlansHeader>
       <S.ExplorePlansBody>

@@ -8,11 +8,11 @@ import PlanDetailsCard from "./PlanDetailsCard";
 import PrimayButton from "../../components/buttons/PrimaryButton";
 import esfContractService from "../../ethereum/contract/esfContractService";
 import { useWeb3React } from "@web3-react/core";
-import { getTransactionReceiptMined } from "../../utils";
 import { CircularProgress } from "@mui/material";
+import axios from "axios";
 
-const MyDataPlanCard = ({ data, adminAddress, status }) => {
-  const { account, library } = useWeb3React();
+const MyDataPlanCard = ({ data, adminAddress, status, setUpdateUserPlans }) => {
+  const { account } = useWeb3React();
   const [loading, setLoading] = useState(false);
 
   const getValueFromDataByTraitType = (traitType) => {
@@ -27,21 +27,6 @@ const MyDataPlanCard = ({ data, adminAddress, status }) => {
   };
 
   const handleActivate = async () => {
-    // let tx = contract.erc1155.contractWrapper.writeContract.safeTransferFrom({
-    //   from: account,
-    //   to: adminAddress,
-    //   id: data.tokenId,
-    //   amount: 1,
-    //   data: null,
-    // });
-    // const tx = await myFunctionAsync([
-    //   account,
-    //   adminAddress,
-    //   data.tokenId,
-    //   1,
-    //   null,
-    // ]);
-    // console.log(tx, "TX");
     setLoading(true);
     await esfContractService
       .transfer({
@@ -53,20 +38,44 @@ const MyDataPlanCard = ({ data, adminAddress, status }) => {
       })
       .then((res) => {
         console.log(res, "RESPONSE");
-        setLoading(false);
+        checkPaymentStatus(res);
       })
       .catch((err) => {
         console.log(err, "ERROR");
         setLoading(false);
       });
+  };
 
-    // let state = getTransactionReceiptMined(response, library);
+  const checkPaymentStatus = (response) => {
+    let confirmationTimeout;
+    axios
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/wallet/payment/confirmation`,
+        {
+          walletAddress: account,
+          tokenId: data?.tokenId,
+          amount: data?.amount,
+          transactionHash: response?.hash,
+        }
+      )
+      .then((res) => {
+        console.log(res, "res2");
+        if (res?.data?.status !== true) {
+          confirmationTimeout = setTimeout(() => {
+            checkPaymentStatus(response);
+          }, 15000);
+        } else {
+          setLoading(false);
+          setUpdateUserPlans();
+        }
+      })
+      .catch((err) => {
+        console.log(err, "ERR2");
+        setLoading(false);
+      });
   };
 
   const handleQr = () => {};
-
-  // console.log(data.metadata, "DATA");
-  // console.log(loading, "loading");
 
   return (
     <S.MyDataPlanCardContainer>
@@ -95,34 +104,6 @@ const MyDataPlanCard = ({ data, adminAddress, status }) => {
           />
         </S.CountryText>
       </S.MyDataPlanHeader>
-
-      {/* <S.MyDataPlanBody>
-        <S.ValidityContainer>
-          <span>{data?.metadata?.name}</span>
-        </S.ValidityContainer>
-        <S.ValidityContainer>
-          <Box>
-            <img
-              style={{ paddingRight: "12px" }}
-              src={CalendarIcon}
-              alt="CalendarIcon"
-            />
-            Validity
-          </Box>
-          <span>{getValueFromDataByTraitType("VALIDITYINDAYS")} Days</span>
-        </S.ValidityContainer>
-        <S.ValidityContainer>
-          <Box>
-            <img
-              style={{ paddingRight: "12px" }}
-              src={TowerIcon}
-              alt="CalendarIcon"
-            />
-            Provider
-          </Box>
-          <span>GIANT Connect</span>
-        </S.ValidityContainer>
-      </S.MyDataPlanBody> */}
 
       <S.MyDataPlanBody>
         <S.StatusContainer>

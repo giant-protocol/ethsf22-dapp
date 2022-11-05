@@ -15,14 +15,16 @@ const LandingPage = () => {
   const [inActivePlans, setInactivePlans] = useState([]);
   const [adminAddress, setAdminAddress] = useState("");
   const [plansLoading, setPlansLoading] = useState(false);
+  const [updateUserPlans, setUpdateUserPlans] = useState(false);
   const { account } = useWeb3React();
 
   useEffect(() => {
     if (account !== undefined) {
       setPlansLoading(true);
       getUserPlans();
+      setUpdateUserPlans(false);
     }
-  }, [account]);
+  }, [account, updateUserPlans]);
 
   const getUserPlans = () => {
     axios
@@ -43,7 +45,6 @@ const LandingPage = () => {
         src={TopBannerImg}
         alt=""
         style={{ marginTop: "5rem", width: "100vw" }}
-        srcset=""
       />
       <S.LandingPageContainer>
         <S.MyDataPlansCard>
@@ -63,6 +64,7 @@ const LandingPage = () => {
                         key={index}
                         adminAddress={adminAddress}
                         status="Inactive"
+                        setUpdateUserPlans={() => setUpdateUserPlans(true)}
                       />
                     );
                   })}
