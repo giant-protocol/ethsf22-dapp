@@ -5,6 +5,7 @@ import MyDataPlanCard from "../../components/cards/MyDataPlanCard";
 import { DEVICE_TYPE, EXPLORE_CARD_PLANS } from "../../utils/constants";
 import TopBannerImg from "../../assets/TopBanner.png";
 import MetamaskIcon from "../../assets/icons/MetamaskIcon.svg";
+import PushProtocolIcon from "../../assets/PushProtocolIcon.svg";
 import { S } from "./styles";
 import { useWeb3React } from "@web3-react/core";
 import { handleConnect } from "../../utils";
@@ -53,7 +54,15 @@ const LandingPage = () => {
       />
       <S.LandingPageContainer>
         <S.MyDataPlansCard>
-          <S.MyDataPlansCardHeader>My Data Plans</S.MyDataPlansCardHeader>
+          <S.MyDataPlansCardHeader>
+            My Data Plans
+            <S.PushProtocolButton
+              sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+            >
+              <img src={PushProtocolIcon} alt="" /> Subscribe to push
+              notifications
+            </S.PushProtocolButton>
+          </S.MyDataPlansCardHeader>
           {plansLoading ? (
             <S.ConnectWalletButtonContainer>
               <CircularProgress sx={{ postion: "relative", top: "-2rem" }} />
