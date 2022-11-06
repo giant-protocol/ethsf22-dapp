@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Button } from "@mui/material";
 import { Box } from "@mui/system";
 
 const HeaderWrapper = styled(Box)(({ theme }) => ({
@@ -17,7 +18,7 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "0rem 2rem",
+  padding: "0rem 3rem 0 2rem",
   height: "100%",
   //   [theme.breakpoints.down("sm")]: {
   //     padding: "0rem 0 0 1rem",
@@ -52,10 +53,22 @@ const LogoContainer = styled(Box)(({ theme }) => ({
   cursor: "pointer",
 }));
 
+const PushProtocolButton = styled(Button)(({ theme }) => ({
+  height: "2.5rem",
+  background: "#ff96e840",
+  borderRadius: "3.125rem",
+  textTransform: "none",
+  color: "#0B213E",
+  fontSize: "1.25rem",
+  fontWeight: "400",
+  padding: "0 1.5rem",
+}));
+
 export const S = {
   HeaderWrapper,
   HeaderContainer,
   BalanceContainer,
   WalletWrapperContainer,
   LogoContainer,
+  PushProtocolButton,
 };

@@ -12,7 +12,6 @@ import { handleConnect } from "../../utils";
 import { CircularProgress } from "@mui/material";
 import DummyCard from "../../components/cards/DummyCard";
 import QrModal from "../../components/modal";
-import * as PushAPI from "@pushprotocol/restapi";
 
 const LandingPage = () => {
   const [activePlans, setActivePlans] = useState([]);
@@ -23,7 +22,7 @@ const LandingPage = () => {
   const [enableShowQrModal, setEnableShowQRModal] = useState(false);
   const [modalData, setModalData] = useState([]);
   const [deviceType, setDeviceType] = useState(DEVICE_TYPE[0].value);
-  const { account, provider } = useWeb3React();
+  const { account } = useWeb3React();
 
   useEffect(() => {
     if (account !== undefined) {
@@ -43,25 +42,8 @@ const LandingPage = () => {
         setActivePlans(res.data.activePlans);
         setInactivePlans(res.data.inActivePlans);
         setAdminAddress(res.data.admin);
+        localStorage.setItem("subscribed", res?.data?.isPushProtocolEnabled);
       });
-  };
-
-  const handleNotification = async () => {
-    const signer = provider.getSigner(account);
-
-    await PushAPI.channels.subscribe({
-      signer: signer,
-      channelAddress: process.env.REACT_APP_PUSH_PROTOCOL_CHANNEL_ADDRESS, // channel address in CAIP
-      userAddress: account,
-      onSuccess: () => {
-        console.log("opt in success");
-      },
-      onError: () => {
-        console.error("opt in error");
-      },
-
-      env: "staging",
-    });
   };
 
   return (
@@ -73,16 +55,7 @@ const LandingPage = () => {
       />
       <S.LandingPageContainer>
         <S.MyDataPlansCard>
-          <S.MyDataPlansCardHeader>
-            My Data Plans
-            <S.PushProtocolButton
-              sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-              onClick={handleNotification}
-            >
-              <img src={PushProtocolIcon} alt="" /> Subscribe to push
-              notifications
-            </S.PushProtocolButton>
-          </S.MyDataPlansCardHeader>
+          <S.MyDataPlansCardHeader>My Data Plans</S.MyDataPlansCardHeader>
           {plansLoading ? (
             <S.ConnectWalletButtonContainer>
               <CircularProgress sx={{ postion: "relative", top: "-2rem" }} />
