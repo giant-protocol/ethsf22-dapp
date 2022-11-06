@@ -82,7 +82,7 @@ const ExplorePlansCardBody = styled(MyDataPlansCardBody)(({ theme }) => ({
   padding: "0",
 }));
 const NoPlansText = styled(Typography)(({ theme }) => ({
-  fontWeight: 700,
+  fontWeight: 400,
   fontSize: "1.325rem",
 }));
 
