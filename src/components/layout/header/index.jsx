@@ -2,6 +2,7 @@ import { Box, useMediaQuery } from "@mui/material";
 import React, { useEffect } from "react";
 import * as PushAPI from "@pushprotocol/restapi";
 import ETHicon from "../../../assets/icons/ethereum.svg";
+import PolygonIcon from "../../../assets/icons/polygon.svg";
 import MainLogoBeta from "../../../assets/icons/MainLogoBeta.svg";
 import MobileViewLogo from "../../../assets/icons/GiantMobileLogo.svg";
 import MetamaskIcon from "../../../assets/icons/MetamaskIcon.svg";
@@ -24,7 +25,7 @@ const Header = ({ subscribed, setUpdateUserPlans }) => {
         targetID: "sdk-trigger-id", // mandatory
         appName: "giant-esim", // mandatory
         user: account, // mandatory
-        chainId: 5, // mandatory
+        chainId: parseInt(process.env.REACT_APP_CURRENT_CHAIN), // mandatory
         viewOptions: {
           showUnreadIndicator: true, // optional
           unreadIndicatorColor: "#cc1919",
@@ -108,8 +109,19 @@ const Header = ({ subscribed, setUpdateUserPlans }) => {
             </>
           )}
           <S.WalletWrapperContainer sx={{ background: "#9369bf40 !important" }}>
-            <img src={ETHicon} alt="" />
-            Goerli test network
+            {process.env.REACT_APP_CURRENT_CHAIN === "5" ? (
+              <img src={ETHicon} alt="" />
+            ) : (
+              process.env.REACT_APP_CURRENT_CHAIN === "137" && (
+                <img src={PolygonIcon} alt="" />
+              )
+            )}
+
+            {process.env.REACT_APP_CURRENT_CHAIN === "5"
+              ? "Goerli test network"
+              : process.env.REACT_APP_CURRENT_CHAIN === "137"
+              ? "Polygon Mainnet"
+              : "Invalid Network"}
           </S.WalletWrapperContainer>
           {!account ? (
             <S.WalletWrapperContainer onClick={handleConnect}>
