@@ -15,7 +15,7 @@ import { EmbedSDK } from "@pushprotocol/uiembed";
 
 const Header = ({ subscribed, setUpdateUserPlans }) => {
   const mobileView = useMediaQuery("(max-width:450px)");
-  const { account, provider } = useWeb3React();
+  const { account, provider, chainId } = useWeb3React();
 
   useEffect(() => {
     if (account) {
@@ -24,12 +24,9 @@ const Header = ({ subscribed, setUpdateUserPlans }) => {
         headerText: "Notifications", // optional
         targetID: "sdk-trigger-id", // mandatory
         appName:
-          parseInt(process.env.REACT_APP_CURRENT_CHAIN) === "137"
-            ? "GIANT"
-            : "giant-esim", // mandatory
+          process.env.REACT_APP_CURRENT_CHAIN === "137" ? "GIANT" : "giant-app", // mandatory
         user: account, // mandatory
-        chainId:
-          parseInt(process.env.REACT_APP_CURRENT_CHAIN) === "137" ? 1 : 5, // mandatory
+        chainId: process.env.REACT_APP_CURRENT_CHAIN === "137" ? 137 : 5, // mandatory
         viewOptions: {
           showUnreadIndicator: true, // optional
           unreadIndicatorColor: "#cc1919",
