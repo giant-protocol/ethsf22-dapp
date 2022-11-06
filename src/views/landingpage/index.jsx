@@ -11,6 +11,7 @@ import { handleConnect } from "../../utils";
 import { Box, CircularProgress } from "@mui/material";
 import DummyCard from "../../components/cards/DummyCard";
 import QrModal from "../../components/modal";
+import noPlansIllustration from "../../assets/NoPlansIllustration.svg";
 
 const LandingPage = ({
   setSubscribed,
@@ -65,9 +66,16 @@ const LandingPage = ({
                 <CircularProgress sx={{ postion: "relative", top: "-2rem" }} />
               </S.ConnectWalletButtonContainer>
             ) : activePlans.length <= 0 && inActivePlans.length <= 0 ? (
-              <S.ConnectWalletButtonContainer>
+              <S.ConnectWalletButtonContainer
+                sx={{
+                  display: "flex !important",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <img src={noPlansIllustration} alt="" />
                 <S.NoPlansText sx={{ postion: "relative", top: "-2rem" }}>
-                  No data plans owned. Checkout our data plans collection below
+                  Need Data? Check plans below
                 </S.NoPlansText>
               </S.ConnectWalletButtonContainer>
             ) : (
