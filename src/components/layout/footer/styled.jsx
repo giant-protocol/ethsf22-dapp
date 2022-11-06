@@ -3,8 +3,8 @@ import { Button, Container, Grid, Typography } from "@mui/material";
 
 const CustomFooter = styled(Container)(({ theme }) => ({
   background: theme.palette.primary.main,
-  padding: "2rem",
-  minHeight: "215px",
+  padding: "0 2rem",
+  minHeight: "150px",
   alignItems: "start",
   [theme.breakpoints.down("lg")]: {
     justifyContent: "flex-start",
