@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 
 const LandingPageContainer = styled(Box)(({ theme }) => ({
@@ -78,6 +78,10 @@ const ExplorePlansCardBody = styled(MyDataPlansCardBody)(({ theme }) => ({
   maxHeight: "unset",
   padding: "0",
 }));
+const NoPlansText = styled(Typography)(({ theme }) => ({
+  fontWeight: 700,
+  fontSize: "1.325rem",
+}));
 
 export const S = {
   LandingPageContainer,
@@ -88,4 +92,5 @@ export const S = {
   ExplorePlansCardBody,
   ConnectWalletButtonContainer,
   ConnectWalletButton,
+  NoPlansText,
 };

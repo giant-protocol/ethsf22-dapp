@@ -8,7 +8,7 @@ import MetamaskIcon from "../../assets/icons/MetamaskIcon.svg";
 import { S } from "./styles";
 import { useWeb3React } from "@web3-react/core";
 import { handleConnect } from "../../utils";
-import { CircularProgress } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import DummyCard from "../../components/cards/DummyCard";
 import QrModal from "../../components/modal";
 
@@ -59,48 +59,62 @@ const LandingPage = ({
       <S.LandingPageContainer>
         <S.MyDataPlansCard>
           <S.MyDataPlansCardHeader>My Data Plans</S.MyDataPlansCardHeader>
-          {plansLoading ? (
-            <S.ConnectWalletButtonContainer>
-              <CircularProgress sx={{ postion: "relative", top: "-2rem" }} />
-            </S.ConnectWalletButtonContainer>
-          ) : (
+          {activePlans.length > 0 && inActivePlans.length > 0 ? (
             <>
-              {account !== undefined ? (
-                <S.MyDataPlansCardBody>
-                  {inActivePlans?.map((data, index) => {
-                    return (
-                      <MyDataPlanCard
-                        data={data}
-                        key={index}
-                        adminAddress={adminAddress}
-                        status="Inactive"
-                        setUpdateUserPlans={() => setUpdateUserPlans(true)}
-                        setEnableShowQRModal={setEnableShowQRModal}
-                        setModalData={setModalData}
-                      />
-                    );
-                  })}
-                  {activePlans?.map((data, index) => {
-                    return (
-                      <MyDataPlanCard
-                        data={data}
-                        key={data.id}
-                        status="Active"
-                        setEnableShowQRModal={setEnableShowQRModal}
-                        setModalData={setModalData}
-                      />
-                    );
-                  })}
-                </S.MyDataPlansCardBody>
-              ) : (
+              {plansLoading ? (
                 <S.ConnectWalletButtonContainer>
-                  <S.ConnectWalletButton onClick={handleConnect}>
-                    <img src={MetamaskIcon} alt="metamask icon" />
-                    Connect your Metamask wallet
-                  </S.ConnectWalletButton>
+                  <CircularProgress
+                    sx={{ postion: "relative", top: "-2rem" }}
+                  />
                 </S.ConnectWalletButtonContainer>
+              ) : (
+                <>
+                  {account !== undefined ? (
+                    <S.MyDataPlansCardBody>
+                      {inActivePlans?.map((data, index) => {
+                        return (
+                          <MyDataPlanCard
+                            data={data}
+                            key={index}
+                            adminAddress={adminAddress}
+                            status="Inactive"
+                            setUpdateUserPlans={() => setUpdateUserPlans(true)}
+                            setEnableShowQRModal={setEnableShowQRModal}
+                            setModalData={setModalData}
+                          />
+                        );
+                      })}
+                      {activePlans?.map((data, index) => {
+                        return (
+                          <MyDataPlanCard
+                            data={data}
+                            key={data.id}
+                            status="Active"
+                            setEnableShowQRModal={setEnableShowQRModal}
+                            setModalData={setModalData}
+                          />
+                        );
+                      })}
+                    </S.MyDataPlansCardBody>
+                  ) : (
+                    <S.ConnectWalletButtonContainer>
+                      <S.ConnectWalletButton onClick={handleConnect}>
+                        <img src={MetamaskIcon} alt="metamask icon" />
+                        Connect your Metamask wallet
+                      </S.ConnectWalletButton>
+                    </S.ConnectWalletButtonContainer>
+                  )}
+                </>
               )}
             </>
+          ) : (
+            <S.ConnectWalletButtonContainer
+              sx={{ position: "relative", top: "-2rem" }}
+            >
+              <S.NoPlansText>
+                No data plans owned. Checkout our data plans collection below
+              </S.NoPlansText>
+            </S.ConnectWalletButtonContainer>
           )}
         </S.MyDataPlansCard>
         <S.ExplorePlansCard>
