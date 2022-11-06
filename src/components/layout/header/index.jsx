@@ -75,9 +75,9 @@ const Header = ({ subscribed, setUpdateUserPlans }) => {
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-between",
+            justifyContent: "flex-end",
             gap: "1rem",
-            width: "30rem",
+            width: "80rem",
           }}
         >
           {account !== undefined && (
