@@ -1,4 +1,4 @@
-import { Box, Tooltip, useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import React, { useEffect } from "react";
 import * as PushAPI from "@pushprotocol/restapi";
 import WalletIcon from "../../../assets/icons/WalletIcon.svg";
@@ -12,10 +12,9 @@ import { useWeb3React } from "@web3-react/core";
 import { handleConnect } from "../../../utils";
 import { EmbedSDK } from "@pushprotocol/uiembed";
 
-const Header = () => {
+const Header = ({ subscribed, setUpdateUserPlans }) => {
   const mobileView = useMediaQuery("(max-width:450px)");
   const { account, provider } = useWeb3React();
-  const isSubscribed = localStorage.getItem("subscribed");
 
   useEffect(() => {
     if (account) {
@@ -44,7 +43,7 @@ const Header = () => {
     return () => {
       EmbedSDK.cleanup();
     };
-  }, [account]);
+  }, [account, subscribed]);
 
   const handleNotification = async () => {
     const signer = provider.getSigner(account);
@@ -55,6 +54,7 @@ const Header = () => {
       userAddress: account,
       onSuccess: () => {
         console.log("opt in success");
+          setUpdateUserPlans(true);
       },
       onError: () => {
         console.error("opt in error");
@@ -80,13 +80,32 @@ const Header = () => {
           }}
         >
           {account !== undefined && (
-            <S.PushProtocolButton
-              id={isSubscribed === "true" ? "sdk-trigger-id" : "unsubscribed"}
-              sx={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-              onClick={isSubscribed === "false" && handleNotification}
-            >
-              <img src={PushProtocolIcon} alt="" />
-            </S.PushProtocolButton>
+            <>
+              {subscribed === true ? (
+                <S.PushProtocolButton
+                  id="sdk-trigger-id"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                  }}
+                >
+                  <img src={PushProtocolIcon} alt="" />
+                </S.PushProtocolButton>
+              ) : (
+                <S.PushProtocolUnSubButton
+                  id="unsubscribed"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                  }}
+                  onClick={() => handleNotification()}
+                >
+                  <img src={PushProtocolIcon} alt="" />
+                </S.PushProtocolUnSubButton>
+              )}
+            </>
           )}
           {/* <button id="sdk-trigger-id">trigger button</button> */}
           {!account ? (

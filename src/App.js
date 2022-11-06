@@ -24,6 +24,13 @@ function App() {
       esfContractService.setup(provider)
     }
   }, [account,provider])
+
+  useEffect(() => {
+     window.ethereum.on('accountsChanged', function (accounts) {
+  window.location.reload()
+})
+  }, [])
+  
   return (
     <div className="App">
         <Layout />

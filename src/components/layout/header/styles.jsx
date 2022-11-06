@@ -64,6 +64,17 @@ const PushProtocolButton = styled(Button)(({ theme }) => ({
   padding: "0 1.5rem",
 }));
 
+const PushProtocolUnSubButton = styled(Button)(({ theme }) => ({
+  height: "2.5rem",
+  background: "#ff96e840",
+  borderRadius: "3.125rem",
+  textTransform: "none",
+  color: "#0B213E",
+  fontSize: "1.25rem",
+  fontWeight: "400",
+  padding: "0 1.5rem",
+}));
+
 export const S = {
   HeaderWrapper,
   HeaderContainer,
@@ -71,4 +82,5 @@ export const S = {
   WalletWrapperContainer,
   LogoContainer,
   PushProtocolButton,
+  PushProtocolUnSubButton,
 };

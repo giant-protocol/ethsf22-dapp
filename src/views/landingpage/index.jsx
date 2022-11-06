@@ -5,7 +5,6 @@ import MyDataPlanCard from "../../components/cards/MyDataPlanCard";
 import { DEVICE_TYPE, EXPLORE_CARD_PLANS } from "../../utils/constants";
 import TopBannerImg from "../../assets/TopBanner.png";
 import MetamaskIcon from "../../assets/icons/MetamaskIcon.svg";
-import PushProtocolIcon from "../../assets/PushProtocolIcon.svg";
 import { S } from "./styles";
 import { useWeb3React } from "@web3-react/core";
 import { handleConnect } from "../../utils";
@@ -13,12 +12,15 @@ import { CircularProgress } from "@mui/material";
 import DummyCard from "../../components/cards/DummyCard";
 import QrModal from "../../components/modal";
 
-const LandingPage = () => {
+const LandingPage = ({
+  setSubscribed,
+  updateUserPlans,
+  setUpdateUserPlans,
+}) => {
   const [activePlans, setActivePlans] = useState([]);
   const [inActivePlans, setInactivePlans] = useState([]);
   const [adminAddress, setAdminAddress] = useState("");
   const [plansLoading, setPlansLoading] = useState(false);
-  const [updateUserPlans, setUpdateUserPlans] = useState(false);
   const [enableShowQrModal, setEnableShowQRModal] = useState(false);
   const [modalData, setModalData] = useState([]);
   const [deviceType, setDeviceType] = useState(DEVICE_TYPE[0].value);
@@ -43,6 +45,7 @@ const LandingPage = () => {
         setInactivePlans(res.data.inActivePlans);
         setAdminAddress(res.data.admin);
         localStorage.setItem("subscribed", res?.data?.isPushProtocolEnabled);
+        setSubscribed(res?.data?.isPushProtocolEnabled);
       });
   };
 
