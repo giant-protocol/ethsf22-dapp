@@ -37,7 +37,7 @@ const BalanceContainer = styled(Box)(({ theme }) => ({
 }));
 
 const WalletWrapperContainer = styled(Box)(({ theme }) => ({
-  background: "#e2762540",
+  background: "rgba(226, 118, 37, 0.1);",
   height: "2.5rem",
   maxWidth: "19.5rem",
   alignItems: "center",
