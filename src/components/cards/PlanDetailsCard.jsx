@@ -9,6 +9,7 @@ import { S } from "./PlanDetailsCard.Styles";
 
 const PlanDetailsCard = ({ data, status }) => {
   let lastUpdatedOn = moment(new Date(data?.updatedOn)).valueOf();
+
   return (
     <S.MyDataPlanBodyContentCard>
       <S.BottomContainer>
@@ -16,13 +17,23 @@ const PlanDetailsCard = ({ data, status }) => {
           sx={{ display: "flex", alignItems: "baseline", gap: "0.3rem" }}
         >
           Data Available:
-          <S.DataValueText>
-            {" "}
-            {getValueFromDataByTraitType(
-              "quantity_of_data_in_GB",
-              data
-            )} GB{" "}
-          </S.DataValueText>
+          {status === "Inactive" ? (
+            <S.DataValueText>
+              {" "}
+              {getValueFromDataByTraitType(
+                "quantity_of_data_in_GB",
+                data
+              )} GB{" "}
+            </S.DataValueText>
+          ) : (
+            <S.DataValueText>
+              {" "}
+              {data?.dataUsageRemainingInBytes < 1073741824
+                ? (data?.dataUsageRemainingInBytes / 1073741824).toFixed(2)
+                : data?.dataUsageRemainingInBytes / 1073741824}
+              &nbsp; GB{" "}
+            </S.DataValueText>
+          )}
         </S.DataAvailableText>
         {status === "Active" && (
           <S.DataAvailableText>
