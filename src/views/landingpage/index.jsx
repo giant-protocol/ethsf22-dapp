@@ -112,6 +112,9 @@ const LandingPage = ({
                               status="Active"
                               setEnableShowQRModal={setEnableShowQRModal}
                               setModalData={setModalData}
+                              setUpdateUserPlans={() =>
+                                setUpdateUserPlans(true)
+                              }
                             />
                           );
                         })}

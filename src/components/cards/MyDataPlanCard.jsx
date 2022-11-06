@@ -106,12 +106,14 @@ const MyDataPlanCard = ({
   };
 
   const handleRefresh = () => {
-    axios.post(
-      `${process.env.REACT_APP_BACKEND_URL}/api/wallet/verify/installation`,
-      {
-        iccid: data?.iccid,
-      }
-    );
+    axios
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/api/wallet/verify/installation`,
+        {
+          iccid: data?.iccid,
+        }
+      )
+      .then((res) => setUpdateUserPlans(true));
   };
 
   return (
