@@ -18,7 +18,7 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "0rem 3rem 0 2rem",
+  padding: "0rem 5rem 0 2rem",
   height: "100%",
   //   [theme.breakpoints.down("sm")]: {
   //     padding: "0rem 0 0 1rem",
@@ -37,7 +37,7 @@ const BalanceContainer = styled(Box)(({ theme }) => ({
 }));
 
 const WalletWrapperContainer = styled(Box)(({ theme }) => ({
-  background: "#ced6e040",
+  background: "#e2762540",
   height: "2.5rem",
   maxWidth: "19.5rem",
   alignItems: "center",

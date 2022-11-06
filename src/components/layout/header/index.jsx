@@ -1,7 +1,7 @@
 import { Box, useMediaQuery } from "@mui/material";
 import React, { useEffect } from "react";
 import * as PushAPI from "@pushprotocol/restapi";
-import WalletIcon from "../../../assets/icons/WalletIcon.svg";
+import ETHicon from "../../../assets/icons/ethereum.svg";
 import MainLogoBeta from "../../../assets/icons/MainLogoBeta.svg";
 import MobileViewLogo from "../../../assets/icons/GiantMobileLogo.svg";
 import MetamaskIcon from "../../../assets/icons/MetamaskIcon.svg";
@@ -54,7 +54,7 @@ const Header = ({ subscribed, setUpdateUserPlans }) => {
       userAddress: account,
       onSuccess: () => {
         console.log("opt in success");
-          setUpdateUserPlans(true);
+        setUpdateUserPlans(true);
       },
       onError: () => {
         console.error("opt in error");
@@ -74,9 +74,9 @@ const Header = ({ subscribed, setUpdateUserPlans }) => {
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: "space-around",
+            justifyContent: "space-between",
             gap: "1rem",
-            width: "20rem",
+            width: "30rem",
           }}
         >
           {account !== undefined && (
@@ -107,7 +107,10 @@ const Header = ({ subscribed, setUpdateUserPlans }) => {
               )}
             </>
           )}
-          {/* <button id="sdk-trigger-id">trigger button</button> */}
+          <S.WalletWrapperContainer sx={{ background: "#9369bf40 !important" }}>
+            <img src={ETHicon} alt="" />
+            Goerli test network
+          </S.WalletWrapperContainer>
           {!account ? (
             <S.WalletWrapperContainer onClick={handleConnect}>
               <img src={MetamaskIcon} alt="walletLogo" />

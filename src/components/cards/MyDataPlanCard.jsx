@@ -167,6 +167,7 @@ const MyDataPlanCard = ({
             onClick={() =>
               status === "Inactive" ? handleActivate() : handleQr()
             }
+            disable={loading}
           >
             {loading ? (
               <CircularProgress color="inherit" size="1.5rem" />
