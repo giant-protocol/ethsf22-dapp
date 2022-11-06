@@ -54,7 +54,8 @@ const MiniText = styled(Typography)(({ theme }) => ({
 const ScanQR = styled(Box)(({ theme, medium }) => ({
   width: "40%",
   display: "flex",
-  justifyContent: "flex-end",
+  alignItems: "flex-end",
+  flexDirection:"column",
   [theme.breakpoints.down("md")]: {
     width: "100%",
     display: medium ? "flex" : "none",

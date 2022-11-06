@@ -3,9 +3,11 @@ import { FormControlLabel, IconButton, useMediaQuery } from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 import { S } from "./styles";
+import CopyIcon from "../../../assets/icons/CopyIcon.svg";
 import { DEVICE_TYPE } from "../../../utils/constants";
 import PrimaryButton from "../../buttons/PrimaryButton";
 import axios from "axios";
+import { shortenedLink } from "../../../utils/index";
 
 const Scan = ({ deviceType, data, handleClose }) => {
   const [iosSteps, setIosSteps] = useState({
@@ -212,6 +214,17 @@ const Scan = ({ deviceType, data, handleClose }) => {
         <S.QRWrapper>
           <img src={qrData} style={{ height: "90%" }} />
         </S.QRWrapper>
+        <S.CustomLink
+          sx={{ textAlign: "left", width: "70%", margin: "0.3rem 0 0 0" }}
+          onClick={() => navigator.clipboard.writeText(data.qrUrl)}
+        >
+          <img
+            src={CopyIcon}
+            alt="copy icon"
+            style={{ marginRight: "0.5rem" }}
+          />
+          {shortenedLink(data.qrUrl)}
+        </S.CustomLink>
       </S.ScanQR>
     </S.ScanContainer>
   );

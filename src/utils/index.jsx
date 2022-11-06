@@ -25,3 +25,11 @@ export const convertToPascalCase = (data) => {
     return g1.toUpperCase() + g2.toLowerCase();
   });
 };
+
+export function shortenedLink(address, chars = 4) {
+  if (address) {
+    return `${address.slice(0, chars + 15)}.....${address.substring(
+      address.length - 1 - 15
+    )}`;
+  }
+}
