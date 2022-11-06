@@ -65,6 +65,9 @@ const MyDataPlansCardBody = styled(Box)(({ theme }) => ({
   flexWrap: "wrap",
   gap: "1rem",
   justifyContent: "space-between",
+  [theme.breakpoints.down("lg")]: {
+    justifyContent: "center",
+  },
   padding: "0 0.5rem",
 }));
 
