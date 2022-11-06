@@ -162,7 +162,7 @@ const MyDataPlanCard = ({
           <PrimayButton
             style={{
               height: "35px",
-              width: status === "Inactive" ? "25%" : "35%",
+              width: status === "Inactive" ? "30%" : "35%",
             }}
             onClick={() =>
               status === "Inactive" ? handleActivate() : handleQr()
