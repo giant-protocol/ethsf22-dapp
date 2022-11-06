@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { FormControlLabel, IconButton, useMediaQuery } from "@mui/material";
+import {
+  FormControlLabel,
+  IconButton,
+  Tooltip,
+  useMediaQuery,
+} from "@mui/material";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
 import { S } from "./styles";
@@ -20,6 +25,8 @@ const Scan = ({ deviceType, data, handleClose }) => {
     step2: false,
     step3: false,
   });
+  const [tooltipTimer, setTooltipTimer] = useState(false);
+
   const [disableVerification, setDisableVerification] = useState(false);
   const medium = useMediaQuery("(max-width:899.95px)");
   const [verificationLoading, setVerificationLoading] = useState(false);
@@ -58,6 +65,14 @@ const Scan = ({ deviceType, data, handleClose }) => {
         setVerificationLoading(false);
       });
   };
+
+    const handleCopyLink = (address) => {
+      navigator.clipboard.writeText(address);
+      setTooltipTimer(true);
+      setTimeout(() => {
+        setTooltipTimer(false);
+      }, 2000);
+    };
 
   return (
     <S.ScanContainer>
@@ -214,17 +229,21 @@ const Scan = ({ deviceType, data, handleClose }) => {
         <S.QRWrapper>
           <img src={qrData} style={{ height: "90%" }} />
         </S.QRWrapper>
-        <S.CustomLink
-          sx={{ textAlign: "left", width: "73%", margin: "0.3rem 0 0 0" }}
-          onClick={() => navigator.clipboard.writeText(data.qrUrl)}
-        >
-          <img
-            src={CopyIcon}
-            alt="copy icon"
-            style={{ marginRight: "0.5rem" }}
-          />
-          {shortenedLink(data.qrUrl)}
-        </S.CustomLink>
+        <Tooltip title={tooltipTimer ? "copied!" : ""} arrow>
+          <S.CustomLink
+            sx={{ textAlign: "left", width: "73%", margin: "0.3rem 0 0 0" }}
+            onClick={() =>
+              handleCopyLink(data.qrUrl)
+            }
+          >
+            <img
+              src={CopyIcon}
+              alt="copy icon"
+              style={{ marginRight: "0.5rem" }}
+            />
+            {shortenedLink(data.qrUrl)}
+          </S.CustomLink>
+        </Tooltip>
       </S.ScanQR>
     </S.ScanContainer>
   );
