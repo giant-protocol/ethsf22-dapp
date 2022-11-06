@@ -29,7 +29,7 @@ export const convertToPascalCase = (data) => {
 export function shortenedLink(address, chars = 4) {
   if (address) {
     return `${address.slice(0, chars + 15)}.....${address.substring(
-      address.length - 1 - 15
+      address.length - 1 - 20
     )}`;
   }
 }

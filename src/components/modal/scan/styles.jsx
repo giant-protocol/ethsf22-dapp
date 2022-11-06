@@ -65,8 +65,8 @@ const ScanQR = styled(Box)(({ theme, medium }) => ({
 
 const QRWrapper = styled(Box)(({ theme }) => ({
   border: `4px solid ${theme.palette.primary.main}`,
-  height: "280px",
-  width: "280px",
+  height: "260px",
+  width: "260px",
   borderRadius: "8px",
   display: "flex",
   alignItems: "center",

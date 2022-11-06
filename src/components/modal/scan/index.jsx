@@ -215,7 +215,7 @@ const Scan = ({ deviceType, data, handleClose }) => {
           <img src={qrData} style={{ height: "90%" }} />
         </S.QRWrapper>
         <S.CustomLink
-          sx={{ textAlign: "left", width: "70%", margin: "0.3rem 0 0 0" }}
+          sx={{ textAlign: "left", width: "73%", margin: "0.3rem 0 0 0" }}
           onClick={() => navigator.clipboard.writeText(data.qrUrl)}
         >
           <img
