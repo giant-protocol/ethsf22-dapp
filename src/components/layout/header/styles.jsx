@@ -18,7 +18,7 @@ const HeaderContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  padding: "0rem 5rem 0 2rem",
+  padding: "0rem 2rem 0 2rem",
   height: "100%",
   //   [theme.breakpoints.down("sm")]: {
   //     padding: "0rem 0 0 1rem",
