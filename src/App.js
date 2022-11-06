@@ -1,5 +1,5 @@
 import { useWeb3React } from "@web3-react/core";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Layout from "./components/layout";
 import { metaMask } from "./connectors/Metamask";
@@ -7,6 +7,8 @@ import esfContractService from "./ethereum/contract/esfContractService";
 
 function App() {
   const isConnected = localStorage.getItem("isConnected");
+  const isSubscribed = localStorage.getItem("subscribed");
+  const [currentAccount,setCurrentAccount] = useState("")
   const { account,provider } = useWeb3React();
 
   useEffect(() => {
@@ -18,12 +20,17 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if(account !== undefined){
+    if(account !== undefined && provider !== undefined){
       esfContractService.setup(provider)
     }
-  }, [account])
-  
+  }, [account,provider])
 
+  useEffect(() => {
+     window.ethereum.on('accountsChanged', function (accounts) {
+  window.location.reload()
+})
+  }, [])
+  
   return (
     <div className="App">
         <Layout />

@@ -8,11 +8,16 @@ import ESimImg from "../../assets/ESimImg.svg";
 import GiantProviderLogo from "../../assets/GiantProviderIcon.svg";
 
 const ExplorePlanCard = ({ data }) => {
+  const handleOpenSeaLink = () => {
+    window.open(data?.link);
+  };
   return (
     <S.MainContainer
       sx={{
         background: `${data.backgroundColor}`,
+        cursor: "pointer",
       }}
+      onClick={() => handleOpenSeaLink()}
     >
       <S.ExplorePlansHeader
         sx={{ borderBottom: `5px solid ${data?.borderColor}` }}
@@ -29,7 +34,6 @@ const ExplorePlanCard = ({ data }) => {
             bottom: data?.id === 3 ? "-0.4rem" : "-0.1rem",
           }}
           alt=""
-          srcset=""
         />
       </S.ExplorePlansHeader>
       <S.ExplorePlansBody>

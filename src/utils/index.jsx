@@ -1,31 +1,35 @@
-export function getTransactionReceiptMined(txHash, library, interval) {
-  const transactionReceiptAsync = (resolve, reject) => {
-    library
-      .getTransactionReceipt(txHash)
-      .then((receipt) => {
-        if (receipt == null) {
-          setTimeout(
-            () => transactionReceiptAsync(resolve, reject),
-            interval ? interval : 500
-          );
-        } else {
-          resolve(receipt);
-        }
-      })
-      .catch((e) => {
-        console.log("Error getting transaction receipt--->", e);
-      });
-  };
+import { metaMask } from "../connectors/Metamask";
 
-  if (Array.isArray(txHash)) {
-    return Promise.all(
-      txHash.map((oneTxHash) =>
-        getTransactionReceiptMined(oneTxHash, library, interval)
-      )
-    );
-  } else if (typeof txHash === "string") {
-    return new Promise(transactionReceiptAsync);
+export const handleConnect = () => {
+  if (window && window?.ethereum) {
+    metaMask.activate();
+    localStorage.setItem("isConnected", true);
   } else {
-    throw new Error("Invalid Type: " + txHash);
+    window.open("https://metamask.io/");
+  }
+};
+
+export const getValueFromDataByTraitType = (traitType, data) => {
+  let outputData;
+  data?.external_data?.attributes?.forEach((val) => {
+    if (val.trait_type === traitType) {
+      outputData = val.value;
+    }
+  });
+
+  return outputData;
+};
+
+export const convertToPascalCase = (data) => {
+  return data.toLowerCase().replace(/(\w)(\w*)/g, function (g0, g1, g2) {
+    return g1.toUpperCase() + g2.toLowerCase();
+  });
+};
+
+export function shortenedLink(address, chars = 4) {
+  if (address) {
+    return `${address.slice(0, chars + 15)}.....${address.substring(
+      address.length - 1 - 20
+    )}`;
   }
 }
