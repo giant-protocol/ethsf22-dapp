@@ -23,9 +23,13 @@ const Header = ({ subscribed, setUpdateUserPlans }) => {
       EmbedSDK.init({
         headerText: "Notifications", // optional
         targetID: "sdk-trigger-id", // mandatory
-        appName: "giant-esim", // mandatory
+        appName:
+          parseInt(process.env.REACT_APP_CURRENT_CHAIN) === "137"
+            ? "GIANT"
+            : "giant-esim", // mandatory
         user: account, // mandatory
-        chainId: parseInt(process.env.REACT_APP_CURRENT_CHAIN) === "137" ? 1 : 5, // mandatory
+        chainId:
+          parseInt(process.env.REACT_APP_CURRENT_CHAIN) === "137" ? 1 : 5, // mandatory
         viewOptions: {
           showUnreadIndicator: true, // optional
           unreadIndicatorColor: "#cc1919",
