@@ -25,7 +25,7 @@ const Header = ({ subscribed, setUpdateUserPlans }) => {
         targetID: "sdk-trigger-id", // mandatory
         appName: "giant-esim", // mandatory
         user: account, // mandatory
-        chainId: parseInt(process.env.REACT_APP_CURRENT_CHAIN), // mandatory
+        chainId: parseInt(process.env.REACT_APP_CURRENT_CHAIN) === "137" ? 1 : 5, // mandatory
         viewOptions: {
           showUnreadIndicator: true, // optional
           unreadIndicatorColor: "#cc1919",
